@@ -23,9 +23,10 @@ class Grid {
     this.gridArr.forEach(rowDots => (
       rowDots.forEach( dot => dot.drawDot( ctx, this.dotArea ))
     ));
-    this.links.forEach(link => (
-      link.draw(ctx, mousePos)
-    ))
+
+    this.links.forEach(link => {
+      link.drawLink(ctx, mousePos)
+    });
   }
 
   checkForDot(mousePos) {

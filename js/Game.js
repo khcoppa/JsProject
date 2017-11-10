@@ -6,16 +6,20 @@ class Game {
     this.canvasY = canvas.offsetHeight;
     this.mousePos = {};
     this.findMousePos();
+    this.gameOver = false;
+    this.begin = this.begin.bind(this);
   }
+
 
   render() {
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
-    this.grid.drawGrid(this.ctx, );
+    this.grid.drawGrid(this.ctx, this.mousePos);
   }
 
   begin() {
     this.render();
     this.makeLinks();
+    window.requestAnimationFrame(this.begin)
   }
 
   findMousePos() {
