@@ -4,8 +4,9 @@ class Grid {
     this.numRows = 6;
     this.numCols = 6;
     this.makeGrid();
-    this.links = [];
+    this.linksArr = [];
     this.linkedDots = [];
+    this.activeMove = false;
   }
 
   makeGrid() {
@@ -25,7 +26,7 @@ class Grid {
       rowDots.forEach( dot => dot.drawDot( ctx, this.dotArea ))
     ));
 
-    this.links.forEach(link => {
+    this.linksArr.forEach(link => {
       link.drawLink(ctx, mousePos)
     });
   }
@@ -45,10 +46,11 @@ class Grid {
   }
 
   startLink(mousePos) {
+    this.activeMove = true;
     const clickedDot = this.checkForDot(mousePos);
     if (clickedDot) {
       const link = new Link(clickedDot);
-      this.links.push(link);
+      this.linksArr.push(link);
     }
   }
 
@@ -68,14 +70,15 @@ class Grid {
 
   continueLink(mousePos) {
     const nextDot = this.checkForNextDot(mousePos);
-    if (nextDot) {
+    if (nextDot && this.activeMove) {
       const link = new Link(nextDot);
-      this.links.push(link);
+      this.linksArr.push(link);
     }
   }
 
   endLink() {
-    this.links = [];
+    this.linksArr = [];
+    this.activeMove = false;
   }
 
 }

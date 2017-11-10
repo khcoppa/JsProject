@@ -8,6 +8,7 @@ class Game {
     this.findMousePos();
     this.gameOver = false;
     this.begin = this.begin.bind(this);
+    this.activeMove = false;
   }
 
 
@@ -30,14 +31,18 @@ class Game {
     })
   }
 
+  endMove() {
+    this.activeMove = false;
+  }
+
   makeLinks() {
     this.ctx.canvas.addEventListener('mousedown', (e) => {
       this.grid.startLink(this.mousePos);
+      this.activeMove = true;
     });
-
     this.grid.continueLink(this.mousePos);
-
     window.addEventListener('mouseup', () => {
+      this.endMove();
       this.grid.endLink();
     });
   }
