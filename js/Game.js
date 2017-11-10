@@ -34,6 +34,9 @@ class Game {
     this.ctx.canvas.addEventListener('mousedown', (e) => {
       this.grid.startLink(this.mousePos);
     });
+
+    this.grid.continueLink(this.mousePos);
+
     window.addEventListener('mouseup', () => {
       this.grid.endLink();
     });
