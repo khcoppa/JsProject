@@ -2,6 +2,7 @@ class Dot {
   constructor(props) {
     this.posX = props.posX;
     this.posY = props.posY;
+    this.radius = 17;
     this.color = undefined;
     this.canvasPos = {};
     // this.radius = 50;
@@ -13,13 +14,17 @@ class Dot {
     this.color = 'purple'
   }
 
+  setPrimaryColor() {
+
+  }
+
   drawDot(ctx, area) {
     this.canvasPos = {
       canvasX: this.posX * area + (area / 2),
       canvasY: this.posY * area + (area / 2)
     }
     ctx.beginPath();
-    ctx.arc(this.canvasPos.canvasX, this.canvasPos.canvasY, area*.25, 0, Math.PI*2);
+    ctx.arc(this.canvasPos.canvasX, this.canvasPos.canvasY, this.radius, 0, Math.PI*2);
     ctx.fillStyle = this.color;
     ctx.fill();
   }

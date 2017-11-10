@@ -13,6 +13,23 @@ class Game {
 
   begin() {
     this.render();
+    this.makeLinks();
+  }
+
+  findMousePos(canvas, e) {
+    e.preventDefault();
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    return { mouseX, mouseY };
+  }
+
+  makeLinks() {
+    this.ctx.canvas.addEventListener('mousedown', (e) => {
+      this.grid.startLink(this.findMousePos(this.ctx.canvas, e));
+    });
+    window.addEventListener('mouseup', () => {
+      this.grid.endLink();
+    });
   }
 
 }
