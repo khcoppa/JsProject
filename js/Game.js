@@ -4,11 +4,13 @@ class Game {
     this.ctx = canvas.getContext('2d');
     this.canvasX = canvas.offsetWidth;
     this.canvasY = canvas.offsetHeight;
+    this.mousePos = {};
+    this.findMousePos();
   }
 
   render() {
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
-    this.grid.drawGrid(this.ctx);
+    this.grid.drawGrid(this.ctx, );
   }
 
   begin() {
@@ -16,16 +18,17 @@ class Game {
     this.makeLinks();
   }
 
-  findMousePos(canvas, e) {
-    e.preventDefault();
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-    return { mouseX, mouseY };
+  findMousePos() {
+    document.addEventListener('mousemove', (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      this.mousePos = { mouseX, mouseY };
+    })
   }
 
   makeLinks() {
     this.ctx.canvas.addEventListener('mousedown', (e) => {
-      this.grid.startLink(this.findMousePos(this.ctx.canvas, e));
+      this.grid.startLink(this.mousePos);
     });
     window.addEventListener('mouseup', () => {
       this.grid.endLink();

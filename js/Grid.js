@@ -18,11 +18,14 @@ class Grid {
     }
   }
 
-  drawGrid(ctx) {
+  drawGrid(ctx, mousePos) {
     this.dotArea = ctx.canvas.offsetWidth / this.gridArr.length;
     this.gridArr.forEach(rowDots => (
       rowDots.forEach( dot => dot.drawDot( ctx, this.dotArea ))
     ));
+    this.links.forEach(link => (
+      link.draw(ctx, mousePos)
+    ))
   }
 
   checkForDot(mousePos) {
