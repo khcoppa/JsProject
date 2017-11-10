@@ -19,7 +19,7 @@ class Game {
 
   begin() {
     this.render();
-    this.makeLinks();
+    this.checkLinks();
     window.requestAnimationFrame(this.begin)
   }
 
@@ -31,19 +31,22 @@ class Game {
     })
   }
 
-  endMove() {
+  endLink() {
     this.activeMove = false;
+    this.grid.endLink();
   }
 
-  makeLinks() {
-    this.ctx.canvas.addEventListener('mousedown', (e) => {
-      this.grid.startLink(this.mousePos);
-      this.activeMove = true;
+  startMove() {
+    this.activeMove = true;
+    this.grid.startLink(this.cursorPos);
+  }
+
+  checkLinks() {
+    this.ctx.canvas.addEventListener('mousedown', () => {
+      this.startMove();
     });
-    this.grid.continueLink(this.mousePos);
     window.addEventListener('mouseup', () => {
-      this.endMove();
-      this.grid.endLink();
+      this.endLink();
     });
   }
 

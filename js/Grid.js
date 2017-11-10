@@ -35,11 +35,13 @@ class Grid {
     for (let posY = 0; posY < this.numRows; posY++) {
       for (let posX = 0; posX < this.numCols; posX++) {
         let dot = this.gridArr[posX][posY];
-        const dx = mousePos.mouseX - dot.canvasPos.canvasX;
-        const dy = mousePos.mouseY - dot.canvasPos.canvasY;
-        if ((dx * dx + dy * dy) <= (dot.radius * dot.radius)) {
+        // change code
+        const x = mousePos.mouseX - dot.canvasPos.canvasX;
+        const y = mousePos.mouseY - dot.canvasPos.canvasY;
+        if ((x * x + y * y) <= (dot.radius * dot.radius)) {
           return dot;
         }
+        //
       }
     }
     return false;
@@ -50,34 +52,26 @@ class Grid {
     const clickedDot = this.checkForDot(mousePos);
     if (clickedDot) {
       const link = new Link(clickedDot);
-      this.linksArr.push(link);
+      this.links.push(link);
+      this.linkedDots.push(clickedDot);
+    } else {
+      this.endLink();
     }
-  }
-
-  checkForNextDot(mousePos) {
-    for (let posY = 0; posY < this.numRows; posY++) {
-      for (let posX = 0; posX < this.numCols; posX++) {
-        let dot = this.gridArr[posX][posY];
-        const dx = mousePos.mouseX - dot.canvasPos.canvasX;
-        const dy = mousePos.mouseY - dot.canvasPos.canvasY;
-        if ((dx * dx + dy * dy) <= (dot.radius * dot.radius)) {
-          return dot;
-        }
-      }
-    }
-    return false;
   }
 
   continueLink(mousePos) {
-    const nextDot = this.checkForNextDot(mousePos);
+    const nextDot = this.checkForDot(mousePos);
     if (nextDot && this.activeMove) {
       const link = new Link(nextDot);
-      this.linksArr.push(link);
+      if (!this.linksArr.includes(link)) {
+        this.linksArr.push(link);
+      }
     }
   }
 
   endLink() {
     this.linksArr = [];
+    this.linkedDots = [];
     this.activeMove = false;
   }
 
