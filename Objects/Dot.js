@@ -7,8 +7,17 @@ export default class Dot {
     // this.selected = false;
   }
 
-  draw() {
+  setCanvasPos(sizeOfSpace) {
+   this.canvasPos = {
+     cx: this.pos.x * sizeOfSpace + (sizeOfSpace / 2),
+     cy: this.pos.y * sizeOfSpace + (sizeOfSpace / 2),
+     radius: sizeOfSpace * this.radiusPct,
+   };
 
+
+  draw(ctx, spaceAround) {
+    ctx.beginPath();
+    ctx.arc(this.posX, this.)
   }
 
   collapse() {
