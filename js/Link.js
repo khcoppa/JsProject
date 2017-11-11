@@ -1,29 +1,27 @@
 class Link {
   constructor(dot) {
     this.startDot = dot;
-    this.endDot = undefined;
-  }
-
-  connectDots(endDot) {
-    this.endDot = endDot;
-  }
-
-  disconnectDots() {
-    this.endDot = undefined;
   }
 
   drawLink(ctx, mousePos) {
-    ctx.lineWidth = 12 * (ctx.canvas.width / 1200);
+    ctx.lineWidth = 10;
     ctx.strokeStyle = this.startDot.color;
     ctx.beginPath();
-    ctx.moveTo(this.startDot.canvasPos.canvasX, this.startDot.canvasPos.canvasY);
+    ctx.moveTo(this.startDot.gridPos.x, this.startDot.gridPos.y);
     if (this.endDot) {
-      ctx.lineTo(this.endDot.canvasPos.canvasX, this.endDot.canvasPos.canvasY);
+      ctx.lineTo(this.endDot.gridPos.x, this.endDot.gridPos.y);
     } else {
-      ctx.lineTo(mousePos.mouseX, mousePos.mouseY);
+      ctx.lineTo(mousePos.x, mousePos.y);
     }
     ctx.stroke();
   }
 
+  connectDots(dot) {
+    this.endDot = dot;
+  }
+
+  breakLink() {
+    this.endDot = undefined;
+  }
 
 }

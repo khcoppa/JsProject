@@ -41,7 +41,7 @@ class Grid {
     if (selectedDot && selectedDot !== lastDot  && lastDot.canLinkTo(selectedDot)) {
       const isMadeLink = this.linksArr.find( ({start, end}) => {
         return ( (start === lastDot && end === selectedDot)
-              || (start ==== selectedDot && end === lastDot) )
+              || (start === selectedDot && end === lastDot) )
       });
       const thirdDot = this.linkedDots.length < 2 ?
         null : this.linkedDots[this.linkedDots.length - 2];
@@ -50,6 +50,7 @@ class Grid {
       } else if (!isMadeLink) {
         this.addLink(selectedDot);
       }
+    }
   }
 
   checkForDot(mousePos) {
@@ -90,7 +91,6 @@ class Grid {
     const clickedDot = this.checkForDot(mousePos);
     if (clickedDot) {
       this.addLink(clickedDot);
-      }
     } else {
       this.endLink();
     }
