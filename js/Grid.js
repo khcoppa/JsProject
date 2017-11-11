@@ -1,23 +1,26 @@
 class Grid {
   constructor() {
-    this.gridArr = [];
     this.numRows = 6;
     this.numCols = 6;
     this.makeGrid();
-    this.linksArr = [];
     this.linkedDots = [];
-    this.activeMove = false;
+    this.linksArr = [];
   }
 
   makeGrid() {
-    for (let posY = 0; posY < this.numRows; posY++) {
+    this.gridArr = [];
+    for (let col = 0; col < this.numCols; col++) {
       let rowDots = [];
-      for (let posX = 0; posX < this.numCols; posX++) {
-        let dot = new Dot({ posX, posY });
+      for (let row = 0; row < this.numRows; row++) {
+        let dot = new Dot({ pos: { row, col }, color: this.getRandomColor() });
         rowDots.push(dot);
       }
       this.gridArr.push(rowDots);
     }
+  }
+
+  getRandomColor() {
+    return 'gray';
   }
 
   drawGrid(ctx, mousePos) {
@@ -28,12 +31,10 @@ class Grid {
     }
 
     this.gridArr.forEach(rowDots => (
-      rowDots.forEach( dot => dot.drawDot( ctx, this.dotArea ))
+      rowDots.forEach( dot => { dot.drawDot(ctx, this.dotArea, mousePos) })
     ));
 
-    this.linksArr.forEach(link => {
-      link.drawLink(ctx, mousePos)
-    });
+    this.linksArr.forEach(link => { link.drawLink(ctx, mousePos) });
   }
 
   checkForDot(mousePos) {

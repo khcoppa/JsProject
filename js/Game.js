@@ -7,42 +7,39 @@ class Game {
     this.findMousePos();
   }
 
+  begin() {
+    const run = () => {
+      this.render();
+      window.requestAnimationFrame(run);
+    }
+    run();
+    this.checkForLinks();
+  }
 
   render() {
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
     this.grid.drawGrid(this.ctx, this.mousePos);
   }
 
-  begin() {
-    this.render();
-    this.checkLinks();
-    window.requestAnimationFrame(this.begin)
+  checkForLinks() {
+    this.ctx.canvas.addEventListener('mousedown', () => {
+      this.activeMove = true;
+      this.grid.startLink(this.mousePos);
+    });
+    window.addEventListener('mouseup', () => {
+      this.activeMove = false;
+      this.grid.endLink();
+    });
   }
 
   findMousePos() {
+    this.mousePos = { x: 0, y: 0 };
     document.addEventListener('mousemove', (e) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-      this.mousePos = { mouseX, mouseY };
-    })
-  }
-
-  endLink() {
-    this.activeMove = false;
-    this.grid.endLink();
-  }
-
-  startMove() {
-    this.activeMove = true;
-    this.grid.startLink(this.cursorPos);
-  }
-
-  checkLinks() {
-    this.ctx.canvas.addEventListener('mousedown', () => {
-      this.startMove();
-    });
-    window.addEventListener('mouseup', () => {
-      this.endLink();
+      e.preventDefault();
+      e.stopPropagation();
+      const x = e.clientX - this.ctx.canvas.offsetLeft;
+      const y = e.clientY - this.ctx.canvas.offsetTop;
+      this.mousePos = { x, y };
     });
   }
 
