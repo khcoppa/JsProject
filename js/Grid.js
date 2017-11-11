@@ -25,67 +25,83 @@ class Grid {
 
   drawGrid(ctx, mousePos) {
     this.dotArea = ctx.canvas.offsetWidth / this.gridArr.length;
-
     if (this.activeMove) {
       this.continueLink(mousePos);
     }
-
     this.gridArr.forEach(rowDots => (
       rowDots.forEach( dot => { dot.drawDot(ctx, this.dotArea, mousePos) })
     ));
-
     this.linksArr.forEach(link => { link.drawLink(ctx, mousePos) });
   }
 
+  continueLink(mousePos) {
+    const selectedDot = this.checkForDot(mousePos);
+    const lastDot = this.linkedDots[this.linkedDots.length - 1];
+
+    if (selectedDot && selectedDot !== lastDot  && lastDot.canLinkTo(selectedDot)) {
+      const isMadeLink = this.linksArr.find( ({start, end}) => {
+        return ( (start === lastDot && end === selectedDot)
+              || (start ==== selectedDot && end === lastDot) )
+      });
+      const thirdDot = this.linkedDots.length < 2 ?
+        null : this.linkedDots[this.linkedDots.length - 2];
+      if (thirdDot && thirdDot === selectedDot) {
+        this.breakLastLink();
+      } else if (!isMadeLink) {
+        this.addLink(selectedDot);
+      }
+  }
+
   checkForDot(mousePos) {
-    for (let posY = 0; posY < this.numRows; posY++) {
-      for (let posX = 0; posX < this.numCols; posX++) {
-        let dot = this.gridArr[posX][posY];
-        // change code
-        const x = mousePos.mouseX - dot.canvasPos.canvasX;
-        const y = mousePos.mouseY - dot.canvasPos.canvasY;
-        if ((x * x + y * y) <= (dot.radius * dot.radius)) {
+    for (let col = 0; col < this.numCols; col++) {
+      for (let row = 0; row < this.numRows; row++) {
+        let dot = this.gridArr[row][col];
+        if (dot.isSelected(mousePos)) {
           return dot;
         }
-        //
       }
     }
     return false;
+  }
+
+  breakLastLink() {
+    this.linkedDots.pop();
+    this.linksArr.pop();
+    // check
+    const lastLink = this.linksArr[this.linksArr.length - 1];
+    if (lastLink.endSpot) {
+      lastLink.breakLink();
+    }
+  }
+
+  addLink(dot) {
+    dot.setAnchor();
+    const link = new Link(dot);
+    if (this.linkedDots.length > 0) {
+      this.linkedDots[this.linkedDots.length - 1].setStill();
+      this.linksArr[this.linksArr.length - 1].connectDots(dot);
+    }
+    this.linkedDots.push(dot);
+    this.linksArr.push(link);
   }
 
   startLink(mousePos) {
     this.activeMove = true;
     const clickedDot = this.checkForDot(mousePos);
     if (clickedDot) {
-      const link = new Link(clickedDot);
-      this.links.push(link);
-      if (!this.linkedDots.includes(clickedDot)) {
-        this.linkedDots.push(clickedDot);
+      this.addLink(clickedDot);
       }
     } else {
       this.endLink();
     }
   }
 
-  continueLink(mousePos) {
-    const nextDot = this.checkForDot(mousePos);
-    const prevDot = this.linkedDots[this.linkedDots.length - 1];
-    // check if connection is possible v
-    if (nextDot && nextDot !== prevDot  ) {
-      const link = new Link(nextDot);
-      this.links.push(link);
-      if (!this.linkedDots.includes(clickedDot)) {
-        this.linkedDots.push(clickedDot);
-      }
-      const prevLink = this.links[this.links.length - 1];
-      prevLink.connectDots(nextDot);
-    }
-  }
 
   endLink() {
+    this.activeMove = false;
+    this.linkedDots.forEach((dot) => { dot.setStill() });
     this.linksArr = [];
     this.linkedDots = [];
-    this.activeMove = false;
   }
 
 }
