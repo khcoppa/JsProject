@@ -20,7 +20,9 @@ class Grid {
   }
 
   getRandomColor() {
-    return 'red';
+    // red/pink , orange/yellow, green, blue, purple
+    const colorsArr = ["#e91e63", "#ff9800", "#00963e", "#00bcd4", "#9c27b0"]
+    return colorsArr[Math.floor(Math.random() * 5)];
   }
 
   drawGrid(ctx, mousePos) {
@@ -37,13 +39,8 @@ class Grid {
   continueLink(mousePos) {
     const selectedDot = this.checkForDot(mousePos);
     const lastDot = this.linkedDots[this.linkedDots.length - 1];
-    if (selectedDot) {
-
-      console.log(lastDot.canLinkTo(selectedDot));
-    }
 
     if (selectedDot && selectedDot !== lastDot  && lastDot.canLinkTo(selectedDot)) {
-      console.log('MADE IT')
       const isMadeLink = this.linksArr.find( ({start, end}) => {
         return ( (start === lastDot && end === selectedDot)
               || (start === selectedDot && end === lastDot) )
@@ -88,9 +85,6 @@ class Grid {
       this.linkedDots[this.linkedDots.length - 1].setStill();
       this.linksArr[this.linksArr.length - 1].connectDots(dot);
     }
-    console.log(this.linksArr);
-    console.log(this.linkedDots);
-
     this.linkedDots.push(dot);
     this.linksArr.push(link);
   }

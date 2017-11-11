@@ -37,8 +37,6 @@ class Dot {
 
   canLinkTo(dot) {
     const checkColor = dot.color === this.color;
-    console.log(checkColor, ' - color');
-    console.log(this.isNextTo(dot.pos), ' - pos');
     return (checkColor && this.isNextTo(dot.pos))
   }
 
