@@ -4,11 +4,7 @@ class Game {
     this.ctx = canvas.getContext('2d');
     this.canvasX = canvas.offsetWidth;
     this.canvasY = canvas.offsetHeight;
-    this.mousePos = {};
     this.findMousePos();
-    this.gameOver = false;
-    this.begin = this.begin.bind(this);
-    this.activeMove = false;
   }
 
 

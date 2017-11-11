@@ -22,6 +22,11 @@ class Grid {
 
   drawGrid(ctx, mousePos) {
     this.dotArea = ctx.canvas.offsetWidth / this.gridArr.length;
+
+    if (this.activeMove) {
+      this.continueLink(mousePos);
+    }
+
     this.gridArr.forEach(rowDots => (
       rowDots.forEach( dot => dot.drawDot( ctx, this.dotArea ))
     ));
@@ -53,7 +58,9 @@ class Grid {
     if (clickedDot) {
       const link = new Link(clickedDot);
       this.links.push(link);
-      this.linkedDots.push(clickedDot);
+      if (!this.linkedDots.includes(clickedDot)) {
+        this.linkedDots.push(clickedDot);
+      }
     } else {
       this.endLink();
     }
@@ -61,11 +68,16 @@ class Grid {
 
   continueLink(mousePos) {
     const nextDot = this.checkForDot(mousePos);
-    if (nextDot && this.activeMove) {
+    const prevDot = this.linkedDots[this.linkedDots.length - 1];
+    // check if connection is possible v
+    if (nextDot && nextDot !== prevDot  ) {
       const link = new Link(nextDot);
-      if (!this.linksArr.includes(link)) {
-        this.linksArr.push(link);
+      this.links.push(link);
+      if (!this.linkedDots.includes(clickedDot)) {
+        this.linkedDots.push(clickedDot);
       }
+      const prevLink = this.links[this.links.length - 1];
+      prevLink.connectDots(nextDot);
     }
   }
 
