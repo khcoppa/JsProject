@@ -3,6 +3,10 @@ class Link {
     this.startDot = dot;
   }
 
+  connectDots(dot) {
+    this.endDot = dot;
+  }
+
   drawLink(ctx, mousePos) {
     ctx.lineWidth = 10;
     ctx.strokeStyle = this.startDot.color;
@@ -16,9 +20,6 @@ class Link {
     ctx.stroke();
   }
 
-  connectDots(dot) {
-    this.endDot = dot;
-  }
 
   breakLink() {
     this.endDot = undefined;

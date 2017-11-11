@@ -20,7 +20,7 @@ class Grid {
   }
 
   getRandomColor() {
-    return 'gray';
+    return 'red';
   }
 
   drawGrid(ctx, mousePos) {
@@ -37,8 +37,13 @@ class Grid {
   continueLink(mousePos) {
     const selectedDot = this.checkForDot(mousePos);
     const lastDot = this.linkedDots[this.linkedDots.length - 1];
+    if (selectedDot) {
+
+      console.log(lastDot.canLinkTo(selectedDot));
+    }
 
     if (selectedDot && selectedDot !== lastDot  && lastDot.canLinkTo(selectedDot)) {
+      console.log('MADE IT')
       const isMadeLink = this.linksArr.find( ({start, end}) => {
         return ( (start === lastDot && end === selectedDot)
               || (start === selectedDot && end === lastDot) )
@@ -62,7 +67,7 @@ class Grid {
         }
       }
     }
-    return false;
+    return null;
   }
 
   breakLastLink() {
@@ -76,12 +81,16 @@ class Grid {
   }
 
   addLink(dot) {
+    // check if dot already added.
     dot.setAnchor();
     const link = new Link(dot);
     if (this.linkedDots.length > 0) {
       this.linkedDots[this.linkedDots.length - 1].setStill();
       this.linksArr[this.linksArr.length - 1].connectDots(dot);
     }
+    console.log(this.linksArr);
+    console.log(this.linkedDots);
+
     this.linkedDots.push(dot);
     this.linksArr.push(link);
   }

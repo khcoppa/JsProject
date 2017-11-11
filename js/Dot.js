@@ -31,30 +31,32 @@ class Dot {
     // cite formula for finding mousePos on top of circle
     const x = mousePos.x - this.gridPos.x;
     const y = mousePos.y - this.gridPos.y;
-    return (x**2 + y**2) <= (this.radius**2)
+    return (x**2 + y**2) <= (this.radius**2);
     //
   }
 
   canLinkTo(dot) {
     const checkColor = dot.color === this.color;
+    console.log(checkColor, ' - color');
+    console.log(this.isNextTo(dot.pos), ' - pos');
     return (checkColor && this.isNextTo(dot.pos))
   }
 
   isNextTo (dotPos) {
     // check top
-    if (this.pos.x === dotPos.x && (this.pos.y + 1) === dotPos.y) {
+    if (this.pos.row === dotPos.row && (this.pos.col + 1) === dotPos.col) {
       return true;
     }
     // check bottom
-    else if (this.pos.x === dotPos.x && (this.pos.y - 1) === dotPos.y) {
+    else if (this.pos.row === dotPos.row && (this.pos.col - 1) === dotPos.col) {
       return true;
     }
     // check right
-    else if ((this.pos.x + 1) === dotPos.x && this.pos.y === dotPos.y) {
+    else if ((this.pos.row + 1) === dotPos.row && this.pos.col === dotPos.col) {
       return true;
     }
     // check left
-    else if ((this.pos.x - 1) === dotPos.x && this.pos.y === dotPos.y) {
+    else if ((this.pos.row - 1) === dotPos.row && this.pos.col === dotPos.col) {
       return true;
     }
     return false;

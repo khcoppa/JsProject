@@ -8,15 +8,20 @@ class Game {
   }
 
   begin() {
-    const run = () => {
-      this.render();
-      window.requestAnimationFrame(run);
-    }
-    run();
+    const animate = (time) => {
+      const timeDelta = time - this.lastTime;
+      this.lastTime = time;
+
+      this.render(timeDelta);
+
+      window.requestAnimationFrame(animate);
+
+    };
+    animate(0);
     this.checkForLinks();
   }
 
-  render() {
+  render(timeDelta) {
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
     this.grid.drawGrid(this.ctx, this.mousePos);
   }
