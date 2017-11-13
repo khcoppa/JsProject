@@ -110,14 +110,61 @@ class Grid {
   checkForValidMove() {
     // check for sqaure
       // if square, add all dots of color to linkedDots
-      // call addPointsToScore
-      // call repopulateGrid
+    if (this.linksArr.length >= 5) {
+      this.checkForSquares();
+    }
 
     // check if link has two or more dots
-
+      // call addPointsToScore
+      // call repopulateGrid
     if (this.linkedDots.length >= 2) {
       this.addPointsToScore();
       this.repopulateGrid();
+    }
+  }
+
+  checkForSquares() {
+    let square = false;
+
+    this.linkedDots.forEach( (dot) => {
+      if (square) {
+        return;
+      }
+      let right = false;
+      let dia = false;
+      let bottom = false;
+
+      const referencePos = dot.pos;
+
+      for (let i = 0; i < this.linkedDots.length; i++) {
+        const comparePos = this.linkedDots[i].pos;
+        if (referencePos.col + 1 === comparePos.col &&
+        referencePos.row === comparePos.row) {
+          right = true;
+        } else if (referencePos.col + 1 === comparePos.col &&
+        referencePos.row + 1 === comparePos.row) {
+          dia = true;
+        } else if (referencePos.col === comparePos.col &&
+        referencePos.row + 1 === comparePos.row) {
+          bottom = true;
+        }
+      }
+
+      if (right && dia && bottom) {
+        square = true;
+        this.collectSameColorDots(dot.color);
+      }
+    });
+    return square;
+  }
+
+  collectSameColorDots(color) {
+    for (let row = 0; row < this.numCols; row++) {
+      for (let col = 0; col < this.numRows; col++) {
+        if (this.gridArr[row][col].color === color) {
+          this.linkedDots.push(this.gridArr[row][col]);
+        }
+      }
     }
   }
 
@@ -143,24 +190,6 @@ class Grid {
           this.gridArr[row][dot.pos.col] = dotToMove;
         }
       }
-
-      // const dotToRemove = this.gridArr[dot.pos.row][dot.pos.col];
-      // const dotToRemovePos = dotToRemove.pos;
-      // // console.log(dotToRemove);
-      // // console.log(dotToRemovePos);
-      // for (let r = dot.pos.row; r >= 0; r--) {
-      //   if (r > 0) {
-      //     const dotToMoveDown = this.gridArr[r][dotToRemovePos.col];
-      //     console.log(dotToMoveDown);
-      //     // console.log(this.gridArr[r+1][dotToRemovePos.col]);
-      //     // this.gridArr[r+1][dotToRemovePos.col] = dotToMoveDown;
-      //   } else {
-      //     const newDotPos = { col: dot.pos.col, row: r}
-      //     const newDot = new Dot({ pos: newDotPos, color: this.getRandomColor()});
-      //     this.gridArr[r][newDotPos.col] = newDot;
-      //   }
-      // }
-
     });
   }
 
