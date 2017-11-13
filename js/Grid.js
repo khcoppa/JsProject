@@ -129,22 +129,33 @@ class Grid {
 
   repopulateGrid() {
     this.linkedDots.forEach( (dot) => {
-      // console.log(dot);
-      // console.log('col : ', dot.pos.col);
-      // console.log('row : ', dot.pos.row);
-      // const removePos = {col: dot.pos.col, col: dot.pos.col};
+      // const replacementPos = { col: dot.pos.col, row: dot.pos.row };
+      // const replacementDot = new Dot({ pos: replacementPos, color: this.getRandomColor() });
+      // this.gridArr[replacementPos.row][replacementPos.col] = replacementDot;
 
-      // this.grid[dot.col][dot.row] = null;
-      // for (let y = pos.row; y > 0; y--) {
-      //   // this swaps out the positions of the spots so that it shifts them "down" (higher index)
-      //   this.grid[y][pos.col] = this.grid[y - 1][pos.col];
-      //   this.grid[y - 1][pos.col] = null;
-      //   this.grid[y][pos.col].pos.y = y;
-      // }
-      const replacementPos = { col: dot.pos.col, row: dot.pos.row };
-      const replacementDot = new Dot({ pos: replacementPos, color: this.getRandomColor() });
-      console.log(replacementPos.col, replacementPos.row);
-      this.gridArr[replacementPos.row][replacementPos.col] = replacementDot;
+      // new dots are [col][row] 0 / 3 gone - new 0 / 0 ... 1 / 3 gone - new 1 / 0
+      // dots at gone spots are the ones above and so on till col = 1
+      // move down
+        // 0 / 3 gone : 0 / 2 down - 0 / 1 down - 0 / 0 new
+        // 1 / 3 gone : 1 / 2 down - 1 / 1 down - 1 / 0 new
+        // 2 / 3 gone : 2 / 2 down - 2 / 1 down - 2 / 0 new
+      const dotToRemove = this.gridArr[dot.pos.row][dot.pos.col];
+      const dotToRemovePos = dotToRemove.pos;
+      // console.log(dotToRemove);
+      // console.log(dotToRemovePos);
+      for (let r = dot.pos.row; r >= 0; r--) {
+        if (r > 0) {
+          const dotToMoveDown = this.gridArr[r][dotToRemovePos.col];
+          console.log(dotToMoveDown);
+          // console.log(this.gridArr[r+1][dotToRemovePos.col]);
+          // this.gridArr[r+1][dotToRemovePos.col] = dotToMoveDown;
+        } else {
+          const newDotPos = { col: dot.pos.col, row: r}
+          const newDot = new Dot({ pos: newDotPos, color: this.getRandomColor()});
+          this.gridArr[r][newDotPos.col] = newDot;
+        }
+
+      }
     });
   }
 
