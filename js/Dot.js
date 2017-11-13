@@ -17,8 +17,8 @@ class Dot {
   drawDot(ctx, area, mousePos) {
     // cite code for making dots in grid on canvas
     this.gridPos = {
-      x: this.pos.row * area + (area / 2),
-      y: this.pos.col * area + (area / 2)
+      x: this.pos.col * area + (area / 2),
+      y: this.pos.row * area + (area / 2)
     }
     //
     ctx.beginPath();
@@ -41,7 +41,7 @@ class Dot {
   }
 
   isNextTo (dotPos) {
-    // check top
+    // check right
     if (this.pos.row === dotPos.row && (this.pos.col + 1) === dotPos.col) {
       return true;
     }

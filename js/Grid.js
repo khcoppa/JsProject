@@ -9,9 +9,9 @@ class Grid {
 
   makeGrid() {
     this.gridArr = [];
-    for (let col = 0; col < this.numCols; col++) {
+    for (let row = 0; row < this.numCols; row++) {
       let rowDots = [];
-      for (let row = 0; row < this.numRows; row++) {
+      for (let col = 0; col < this.numRows; col++) {
         let dot = new Dot({ pos: { row, col }, color: this.getRandomColor() });
         rowDots.push(dot);
       }
@@ -56,9 +56,9 @@ class Grid {
   }
 
   checkForDot(mousePos) {
-    for (let col = 0; col < this.numCols; col++) {
-      for (let row = 0; row < this.numRows; row++) {
-        let dot = this.gridArr[row][col];
+    for (let row = 0; row < this.numCols; row++) {
+      for (let col = 0; col < this.numRows; col++) {
+        let dot = this.gridArr[col][row];
         if (dot.isSelected(mousePos)) {
           return dot;
         }
@@ -102,9 +102,52 @@ class Grid {
 
   endLink() {
     this.activeMove = false;
-    this.linkedDots.forEach((dot) => { dot.setStill() });
+    this.checkForValidMove();
     this.linksArr = [];
     this.linkedDots = [];
   }
+
+  checkForValidMove() {
+    // check for sqaure
+      // if square, add all dots of color to linkedDots
+      // call addPointsToScore
+      // call repopulateGrid
+
+    // check if link has two or more dots
+
+    if (this.linkedDots.length >= 2) {
+      this.addPointsToScore();
+      this.repopulateGrid();
+    }
+  }
+
+  addPointsToScore() {
+    return true;
+    // get length of this.linkedDots
+    // add to total score
+  }
+
+  repopulateGrid() {
+    this.linkedDots.forEach( (dot) => {
+      // console.log(dot);
+      // console.log('col : ', dot.pos.col);
+      // console.log('row : ', dot.pos.row);
+      // const removePos = {col: dot.pos.col, col: dot.pos.col};
+
+      // this.grid[dot.col][dot.row] = null;
+      // for (let y = pos.row; y > 0; y--) {
+      //   // this swaps out the positions of the spots so that it shifts them "down" (higher index)
+      //   this.grid[y][pos.col] = this.grid[y - 1][pos.col];
+      //   this.grid[y - 1][pos.col] = null;
+      //   this.grid[y][pos.col].pos.y = y;
+      // }
+      const replacementPos = { col: dot.pos.col, row: dot.pos.row };
+      const replacementDot = new Dot({ pos: replacementPos, color: this.getRandomColor() });
+      console.log(replacementPos.col, replacementPos.row);
+      this.gridArr[replacementPos.row][replacementPos.col] = replacementDot;
+    });
+  }
+
+
 
 }
