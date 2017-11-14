@@ -7,6 +7,7 @@ class Game {
     this.findMousePos();
     this.moves = 30;
     this.score = 0;
+    this.endGame = false;
   }
 
   begin() {
@@ -14,16 +15,20 @@ class Game {
       const timeChange = time - this.lastTime;
       this.lastTime = time;
 
-      this.render(timeChange);
+      this.render();
 
-      window.requestAnimationFrame(animate);
+      if (this.endGame) {
+        this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
+      } else {
+        window.requestAnimationFrame(animate);
+      }
 
     };
     animate(0);
     this.checkForLinks();
   }
 
-  render(timeChange) {
+  render() {
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
     this.grid.drawGrid(this.ctx, this.mousePos);
   }
@@ -49,13 +54,8 @@ class Game {
       this.score += points;
     }
     if (this.moves === 0) {
-      this.endGame();
+      this.endGame = true;
     }
-    console.log(this.score, this.moves);
-  }
-
-  endGame() {
-    this.clearCanvas();
     console.log(this.score, this.moves);
   }
 
