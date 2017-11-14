@@ -1,5 +1,6 @@
 class Grid {
   constructor() {
+    this.points = 0;
     this.numRows = 6;
     this.numCols = 6;
     this.makeGrid();
@@ -105,6 +106,9 @@ class Grid {
     this.checkForValidMove();
     this.linksArr = [];
     this.linkedDots = [];
+    const returnPts = this.points;
+    this.points = 0;
+    return returnPts;
   }
 
   checkForValidMove() {
@@ -115,12 +119,16 @@ class Grid {
     }
 
     // check if link has two or more dots
-      // call addPointsToScore
+      // call addPoints
       // call repopulateGrid
     if (this.linkedDots.length >= 2) {
-      this.addPointsToScore();
+      this.addPoints();
       this.repopulateGrid();
+      // this.moves -= 1;
+      // console.log(this.moves);
     }
+
+    // this.outOfMoves();
   }
 
   checkForSquares() {
@@ -168,10 +176,11 @@ class Grid {
     }
   }
 
-  addPointsToScore() {
-    return true;
+  addPoints() {
     // get length of this.linkedDots
-    // add to total score
+    // add to total points
+    this.points = this.linkedDots.length;
+    // console.log(this.points);
   }
 
   repopulateGrid() {
@@ -193,6 +202,10 @@ class Grid {
     });
   }
 
-
+  // outOfMoves() {
+  //   if (this.moves === 0) {
+  //     console.log('done!');
+  //   }
+  // }
 
 }

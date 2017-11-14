@@ -5,14 +5,16 @@ class Game {
     this.canvasX = canvas.offsetWidth;
     this.canvasY = canvas.offsetHeight;
     this.findMousePos();
+    this.moves = 30;
+    this.score = 0;
   }
 
   begin() {
     const animate = (time) => {
-      const timeDelta = time - this.lastTime;
+      const timeChange = time - this.lastTime;
       this.lastTime = time;
 
-      this.render(timeDelta);
+      this.render(timeChange);
 
       window.requestAnimationFrame(animate);
 
@@ -21,7 +23,7 @@ class Game {
     this.checkForLinks();
   }
 
-  render(timeDelta) {
+  render(timeChange) {
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
     this.grid.drawGrid(this.ctx, this.mousePos);
   }
@@ -33,8 +35,28 @@ class Game {
     });
     window.addEventListener('mouseup', () => {
       this.activeMove = false;
-      this.grid.endLink();
+      // this.grid.endLink();
+
+      this.endLink();
     });
+  }
+
+  endLink() {
+    // this.grid.endLink returns points for move
+    const points = this.grid.endLink();
+    if (points > 0) {
+      this.moves -= 1;
+      this.score += points;
+    }
+    if (this.moves === 0) {
+      this.endGame();
+    }
+    console.log(this.score, this.moves);
+  }
+
+  endGame() {
+    this.clearCanvas();
+    console.log(this.score, this.moves);
   }
 
   findMousePos() {
