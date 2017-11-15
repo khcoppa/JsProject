@@ -31,6 +31,8 @@ class Game {
   render() {
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
     this.grid.drawGrid(this.ctx, this.mousePos);
+    document.querySelector('.moves-span').textContent = 'Moves: ' + this.moves;
+    document.querySelector('.score-span').textContent = 'Score: ' + this.score;
   }
 
   checkForLinks() {
