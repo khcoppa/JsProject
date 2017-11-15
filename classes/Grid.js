@@ -6,6 +6,7 @@ class Grid {
     this.makeGrid();
     this.linkedDots = [];
     this.linksArr = [];
+    this.randColor = '';
   }
 
   makeGrid() {
@@ -23,7 +24,9 @@ class Grid {
   getRandomColor() {
     // red/pink , orange/yellow, green, blue, purple
     const colorsArr = ["#e91e63", "#ff9800", "#00963e", "#00bcd4", "#9c27b0"];
+    const lightColors = ["#f8bafc", "#fceeba", "#bafcc3", "#cfd2f9", "#f0c7fc"];
     const randomIdx = Math.floor(Math.random() * 5);
+    this.randColor = lightColors[randomIdx];
     return colorsArr[randomIdx];
   }
 

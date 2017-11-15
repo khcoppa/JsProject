@@ -29,6 +29,7 @@ class Game {
   }
 
   render() {
+    document.body.style.backgroundColor = this.grid.randColor;
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
     this.grid.drawGrid(this.ctx, this.mousePos);
     document.querySelector('.moves-span').textContent = 'Moves: ' + this.moves;
