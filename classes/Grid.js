@@ -22,8 +22,9 @@ class Grid {
 
   getRandomColor() {
     // red/pink , orange/yellow, green, blue, purple
-    const colorsArr = ["#e91e63", "#ff9800", "#00963e", "#00bcd4", "#9c27b0"]
-    return colorsArr[Math.floor(Math.random() * 5)];
+    const colorsArr = ["#e91e63", "#ff9800", "#00963e", "#00bcd4", "#9c27b0"];
+    const randomIdx = Math.floor(Math.random() * 5);
+    return colorsArr[randomIdx];
   }
 
   drawGrid(ctx, mousePos) {
@@ -177,6 +178,7 @@ class Grid {
       }
     }
   }
+
 
   addPoints() {
     // get length of this.linkedDots

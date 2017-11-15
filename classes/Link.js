@@ -1,6 +1,7 @@
 class Link {
   constructor(dot) {
     this.startDot = dot;
+    this.color = dot.color;
   }
 
   connectDots(dot) {

@@ -15,7 +15,7 @@ body {
 .game-info {
   display: flex;
   justify-content: space-between;
-  margin: 10px 50px;
+  margin: 0 15%;
 }
   .moves {
     display: flex;
@@ -29,6 +29,20 @@ body {
   justify-content: center;
 }
 
-.game-over {
-  display: hidden;
+#new-game {
+  font-family: 'Gloria Hallelujah';
+  background-color: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 2px;
+  width: 80px;
+  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0 15%;
+} #new-game:hover {
+  cursor: pointer;
+  background-color: #806482;
+  color: white;
 }

@@ -3,6 +3,7 @@ class Dot {
     this.pos = props.pos
     this.radius = 17;
     this.color = props.color;
+    
     this.setStill();
   }
 
