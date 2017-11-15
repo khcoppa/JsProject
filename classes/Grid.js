@@ -167,10 +167,12 @@ class Grid {
   }
 
   collectSameColorDots(color) {
+    this.linkedDots = [];
     for (let row = 0; row < this.numCols; row++) {
       for (let col = 0; col < this.numRows; col++) {
-        if (this.gridArr[row][col].color === color) {
-          this.linkedDots.push(this.gridArr[row][col]);
+        const dot = this.gridArr[row][col]
+        if (dot.color === color) {
+          this.linkedDots.push(dot);
         }
       }
     }

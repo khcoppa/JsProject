@@ -1,7 +1,34 @@
-.instructions {
-  display: none;
+body {
+  margin: 0;
+  font-family: 'Gloria Hallelujah';
+}
+
+.title {
+
+  display: flex;
+  justify-content: center;
+} .title h1 {
+    margin: 0;
+    font-size: 60px;
+  }
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 50px;
+}
+  .moves {
+    display: flex;
+  }
+  .score {
+    display: flex;
+  }
+
+.container {
+  display: flex;
+  justify-content: center;
 }
 
 .game-over {
-  display: none;
+  display: hidden;
 }

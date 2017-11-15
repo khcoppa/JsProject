@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <link href="./unicorn.ico" rel="icon" type="image/x-icon" />
     <link rel="stylesheet" href="css/game.css" charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
     <title>UniDot</title>
   </head>
   <body>
@@ -11,30 +13,25 @@
       <h1>UniDot</h1>
     </div>
 
-    <div class="moves">
-      <span class="moves-span"></span>
-    </div>
-    <div class="score">
-      <span class="score-span"></span>
+    <div class="game-info">
+      <div class="moves">
+        <span class="moves-span"></span>
+      </div>
+      <div class="score">
+        <span class="score-span"></span>
+      </div>
     </div>
 
+
+
     <div class="container">
-      <div class="instructions">
-        <ul>
-          <li>Connect Dots to score points</li>
-          <li>Connect Dots by dragging the mouse over adjacent Dots with the same color</p>
-          <li>Connecting 4 Dots in a square unleashes the Power of the Unicorn</p>
-        </ul>
-      </div>
-      <div class="game-over">
-        <h2>Final Score: <span id="final-score"></span></h2>
-      </div>
       <canvas id="canvas" width="450px" height="450px"></canvas>
     </div>
 
     <div class="new-game">
       <button id="new-game">New Game</button>
     </div>
+
     <div class="links">
       <ul>
         <li>Made By Kevin Coppa</li>

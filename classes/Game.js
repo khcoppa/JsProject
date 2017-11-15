@@ -58,7 +58,6 @@ class Game {
     if (this.moves === 0) {
       this.endGame = true;
     }
-    console.log(this.score, this.moves);
   }
 
   findMousePos() {
