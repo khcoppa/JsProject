@@ -1,16 +1,26 @@
 body {
   margin: 0;
   font-family: 'Gloria Hallelujah';
+  /*background-color: transparent;
+  background-image: url('../unicorn-space.png');
+  background-repeat: repeat;*/
+}
+
+ul {
+  list-style: none;
 }
 
 .title {
-
   display: flex;
   justify-content: center;
 } .title h1 {
     margin: 0;
     font-size: 60px;
-  }
+} .title img {
+    height: 60px;
+    width: auto;
+    margin: 30px 110px 0 110px;
+}
 
 .game-info {
   display: flex;
@@ -26,7 +36,23 @@ body {
 
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+} .instructions {
+  width: 250px;
+  align-self: center;
+} .instructions ul {
+  list-style: disc;
+  margin-top: 0;
+} .unicorn {
+  width: 250px;
+  height: 250px;
+  align-self: center;
+} .unicorn img {
+  width: inherit;
+  height: inherit;
+} .unicorn h4 {
+  width: fit-content;
+  margin: 0 auto;
 }
 
 #new-game {
