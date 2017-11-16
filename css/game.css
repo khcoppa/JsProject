@@ -50,7 +50,8 @@ ul {
   width: 250px;
   height: 250px;
   align-self: center;
-} .unicorn img {
+}
+  .unicorn img {
   width: inherit;
   height: inherit;
 } .unicorn h4 {
