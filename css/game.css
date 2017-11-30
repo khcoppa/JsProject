@@ -25,6 +25,10 @@ ul {
   list-style: none;
 }
 
+li {
+  margin-bottom: 20px;
+}
+
 .title {
   display: flex;
   justify-content: center;
@@ -80,6 +84,7 @@ p {
   display: none;
 } .display-score {
   display: block;
+  font-size: 20px;
 }
 
 
