@@ -1,6 +1,24 @@
 body {
-  background-image: none;
-}
+  margin: 0;
+  font-family: 'Gloria Hallelujah';
+  text-align: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  border-width: 0.625rem;
+  border-style: solid;
+  border-color: transparent;
+  background: linear-gradient(270deg, rgba(0, 250, 250, 0.4), rgba(0, 250, 0, 0.4));
+  background-size: 400% 400%;
+  animation: Gradient 10s ease infinite; }
+
+ /*credit to wmcmeans for @keyframes method*/
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
 
 ul {
   list-style: none;
@@ -42,7 +60,14 @@ ul {
   padding: 0;
   list-style: disc;
   margin-top: 0;
-} .unicorn {
+} .instructions a {
+  text-decoration: none;
+  color: inherit;
+} .instructions li:last-of-type {
+  list-style: none;
+}
+
+.unicorn {
   margin-right: 10%;
   width: 250px;
   height: 250px;
@@ -53,6 +78,10 @@ ul {
 } .unicorn h4 {
   width: fit-content;
   margin: 0 auto;
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 #new-game {
@@ -72,26 +101,3 @@ ul {
   background-color: #806482;
   color: white;
 }
-
-
-body {
-  margin: 0;
-  font-family: 'Gloria Hallelujah';
-  text-align: center;
-  min-height: 100vh;
-  box-sizing: border-box;
-  border-width: 0.625rem;
-  border-style: solid;
-  border-color: transparent;
-  background: linear-gradient(270deg, rgba(0, 250, 0, 0.4), rgba(250, 200, 200, 0.4));
-  background-size: 400% 400%;
-  animation: Gradient 10s ease infinite; }
-
- /*credit to wmcmeans for @keyframes method*/
-@keyframes Gradient {
-  0% {
-    background-position: 0% 50%; }
-  50% {
-    background-position: 100% 50%; }
-  100% {
-    background-position: 0% 50%; } }
