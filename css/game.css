@@ -95,7 +95,7 @@ a:hover {
   letter-spacing: 1px;
   font-size: 12px;
   font-weight: 400;
-  margin: 0 10%;
+  margin-top: 50px;
 } #new-game:hover {
   cursor: pointer;
   background-color: #806482;
