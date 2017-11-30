@@ -30,13 +30,13 @@ class Grid {
     return colorsArr[randomIdx];
   }
 
-  drawGrid(ctx, mousePos) {
+  drawGrid(ctx, mousePos, timeChange) {
     this.dotArea = ctx.canvas.offsetWidth / this.gridArr.length;
     if (this.activeMove) {
       this.continueLink(mousePos);
     }
     this.gridArr.forEach(rowDots => (
-      rowDots.forEach( dot => { dot.drawDot(ctx, this.dotArea, mousePos) })
+      rowDots.forEach( dot => { dot.drawDot(ctx, this.dotArea, mousePos, timeChange) })
     ));
     this.linksArr.forEach(link => { link.drawLink(ctx, mousePos) });
   }

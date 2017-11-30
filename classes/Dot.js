@@ -3,7 +3,7 @@ class Dot {
     this.pos = props.pos
     this.radius = 17;
     this.color = props.color;
-    
+
     this.setStill();
   }
 
@@ -60,5 +60,27 @@ class Dot {
     }
     return false;
   }
+
+  // animateDropFromLastY(y) {
+  //   if (typeof this.downValue === 'undefined') {
+  //     this.lastY = y;
+  //     this.downValue = 0.0001;
+  //   } else if (this.lastY < 0) {
+  //     this.lastY -= 1;
+  //   }
+  // }
+  //
+  // animateDrop(area, timeChange) {
+  //   this.downValue += (timeChange * 0.005);
+  //   const prevY = this.lastY * area + (area / 2);
+  //   const currentY = this.pos.row * area + (area / 2);
+  //   const diffY = currentY - previousY;
+  //   if (this.downValue < 1) {
+  //     this.pos.row = prevY + (diffY * this.downValue);
+  //   } else {
+  //     this.downValue = undefined;
+  //     this.lastY = undefined;
+  //   }
+  // }
 
 }

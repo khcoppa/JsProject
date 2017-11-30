@@ -15,7 +15,7 @@ class Game {
       const timeChange = time - this.lastTime;
       this.lastTime = time;
 
-      this.render();
+      this.render(timeChange);
 
       if (this.endGame) {
         this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
@@ -28,10 +28,10 @@ class Game {
     this.checkForLinks();
   }
 
-  render() {
-    document.body.style.backgroundColor = this.grid.randColor;
+  render(timeChange) {
+    // document.body.style.backgroundColor = this.grid.randColor;
     this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
-    this.grid.drawGrid(this.ctx, this.mousePos);
+    this.grid.drawGrid(this.ctx, this.mousePos, timeChange);
     document.querySelector('.moves-span').textContent = 'Moves: ' + this.moves;
     document.querySelector('.score-span').textContent = 'Score: ' + this.score;
   }
