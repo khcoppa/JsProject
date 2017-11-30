@@ -9,7 +9,8 @@ body {
   border-color: transparent;
   background: linear-gradient(270deg, rgba(0, 250, 250, 0.4), rgba(0, 250, 0, 0.4));
   background-size: 400% 400%;
-  animation: Gradient 10s ease infinite; }
+  animation: Gradient 15s ease infinite;
+}
 
  /*credit to wmcmeans for @keyframes method*/
 @keyframes Gradient {
@@ -67,18 +68,21 @@ ul {
   list-style: none;
 }
 
-.unicorn {
+.game-over {
   margin-right: 10%;
   width: 250px;
   height: 250px;
   align-self: center;
+  display: block;
 }
-  .unicorn img {
+
+p {
   display: none;
-} .unicorn h4 {
-  width: fit-content;
-  margin: 0 auto;
+} .display-score {
+  display: block;
 }
+
+
 
 a:hover {
   cursor: pointer;

@@ -18,7 +18,11 @@ class Game {
       this.render(timeChange);
 
       if (this.endGame) {
+        this.finalScore();
+        debugger
         this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
+        this.finalScore.gameOver.classList.add('display-score');
+        this.finalScore.finalScoreText.textContent = this.score;
       } else {
         window.requestAnimationFrame(animate);
       }
@@ -70,6 +74,13 @@ class Game {
       const y = e.clientY - this.ctx.canvas.offsetTop;
       this.mousePos = { x, y };
     });
+  }
+
+  finalScore() {
+    this.finalScore = {
+      gameOver: document.querySelector('#final-score'),
+      finalScoreText: document.querySelector('#final-score-span'),
+    };
   }
 
 }

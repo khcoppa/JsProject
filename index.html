@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link href="./unicorn.ico" rel="icon" type="image/x-icon" />
+    <link href="./dots.ico" rel="icon" type="image/x-icon" />
     <link rel="stylesheet" href="css/game.css" charset="utf-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
@@ -34,12 +34,13 @@
           <li><a target="_blank" href="http://kevincoppa.me">Made By Kevin Coppa</a></li>
         </ul>
       </div>
+
       <canvas id="canvas" width="450px" height="450px"></canvas>
-      <div class="unicorn">
-        <div class="unicorn-cover">
-        </div>
-          <img src="./unicorn-space.png" />
-          <h4></h4>
+
+      <div class="game-over" id="game-over">
+          <p class="final-score" id="final-score">
+            You scored <span id="final-score-span"></span> points.<br>
+          </p>
       </div>
     </div>
 
