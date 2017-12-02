@@ -19,10 +19,11 @@ class Game {
 
       if (this.endGame) {
         this.finalScore();
-        debugger
+
         this.ctx.clearRect(0, 0, this.canvasX, this.canvasY);
         this.finalScore.gameOver.classList.add('display-score');
         this.finalScore.finalScoreText.textContent = this.score;
+        this.finalScore.highscoreText.textContent = localStorage.getItem('highscore');
       } else {
         window.requestAnimationFrame(animate);
       }
@@ -80,7 +81,15 @@ class Game {
     this.finalScore = {
       gameOver: document.querySelector('#final-score'),
       finalScoreText: document.querySelector('#final-score-span'),
+      highscoreText: document.querySelector('#high-score-span'),
     };
+    if (localStorage.getItem('highscore')) {
+      if (localStorage.getItem('highscore') <= this.score) {
+        localStorage.setItem('highscore', this.score);
+      }
+    } else {
+      localStorage.setItem('highscore', this.score);
+    }
   }
 
 }
